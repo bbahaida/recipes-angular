@@ -1,9 +1,14 @@
-<app-header></app-header>
+<app-header (pageSelected)="pageSelected($event)" ></app-header>
 <div class="container">
     <div class="row">
       <div class="col-md-12">
-        <app-recipes></app-recipes>
-        <app-shopping-list></app-shopping-list>
+        <div *ngIf="isRecipes; else shopping" >
+            <app-recipes></app-recipes>
+        </div>
+        <ng-template #shopping>
+            <app-shopping-list ></app-shopping-list>
+        </ng-template>
+        
       </div>
     </div>
   </div>
