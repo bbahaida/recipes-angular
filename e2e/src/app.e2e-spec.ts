@@ -1,6 +1,6 @@
 import { AppPage } from './app.po';
 
-describe('recipes-angular App', () => {
+describe('workspace-project App', () => {
   let page: AppPage;
 
   beforeEach(() => {
