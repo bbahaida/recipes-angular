@@ -8,6 +8,10 @@ import {ShoppingListService} from './shopping-list.service';
 })
 export class RecipeService {
   recipeSelected = new EventEmitter<Recipe>();
+
+  constructor(private shoppingListService: ShoppingListService) {
+  }
+
   private _recipes: Recipe[] = [
     new Recipe(
       'Burger King',
@@ -28,14 +32,24 @@ export class RecipeService {
         new Ingredient('Meat', 2),
       ])
   ];
-  constructor(private shoppingListService: ShoppingListService) { }
+
   get recipes() {
     return this._recipes.slice();
   }
+
   addRecipe(recipe: Recipe) {
     this._recipes.push(recipe);
   }
+
   addToShoppingList(ingredients: Ingredient[]) {
     this.shoppingListService.addIngredients(ingredients);
+  }
+
+  getRecipe(index: number): Recipe {
+    return this._recipes.slice()[index];
+  }
+
+  update(index: number, recipe: Recipe) {
+    this._recipes[index] = recipe;
   }
 }
