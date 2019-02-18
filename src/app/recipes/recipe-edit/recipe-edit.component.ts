@@ -1,4 +1,4 @@
-import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Params} from '@angular/router';
 import {RecipeService} from '../../shared/recipe.service';
 import {Recipe} from '../recipe.model';
@@ -12,7 +12,9 @@ export class RecipeEditComponent implements OnInit {
   recipe: Recipe;
   index: number;
   editMode = false;
-  constructor(private route: ActivatedRoute, private recipeService: RecipeService) { }
+
+  constructor(private route: ActivatedRoute, private recipeService: RecipeService) {
+  }
 
   ngOnInit() {
     this.route.params.subscribe((params: Params) => {
