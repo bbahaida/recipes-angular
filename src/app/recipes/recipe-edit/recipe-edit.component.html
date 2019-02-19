@@ -1,1 +1,75 @@
-<h3>recipe-edit works!</h3>
+<div class="row">
+  <div class="col-xs-12">
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="form-group">
+            <label for="name">Name</label>
+            <input type="text" class="form-control" id="name" formControlName="name">
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="form-group">
+            <label for="image">Image Path</label>
+            <input type="text" class="form-control" id="image" formControlName="imagePath" #imagePath>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-xs-12">
+          <img [src]="imagePath.value" class="img-responsive"
+               width="100px">
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="form-group">
+            <label for="desc">Description</label>
+            <textarea rows="3" class="form-control" id="desc" formControlName="description"></textarea>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-xs-12" formArrayName="ingredients">
+          <div class="row form-group" *ngFor="let ingredientCtrl of getIngredientsFormArray().controls; let i = index"
+               [formGroupName]="i">
+            <div class="col-xs-8">
+              <input type="text" class="form-control" placeholder="Name" formControlName="name">
+            </div>
+            <div class="col-xs-2">
+              <input type="number" class="form-control" placeholder="Amount" formControlName="amount">
+            </div>
+            <div class="col-xs-1">
+              <button type="button" class="btn btn-danger" (click)="onDeleteIngredient(i)">X</button>
+            </div>
+            <div class="col-xs-1">
+              <button *ngIf="isLast(i)" type="button" (click)="onAddIngredient()" class="btn btn-success">+</button>
+            </div>
+          </div>
+        </div>
+        <div *ngIf="isEmpty()">
+          <hr>
+          <div>
+            <button type="button" (click)="onAddIngredient()" class="btn btn-success">Add new Ingredient</button>
+          </div>
+          <hr>
+        </div>
+
+      </div>
+
+      <div class="row">
+        <div class="col-xs-12">
+          <button class="col-xs-4 btn btn-success" type="submit" [disabled]="!form.valid">Save</button>
+          <button class="col-xs-4 col-xs-offset-4 btn btn-danger" type="button" (click)="onReset()">Cancel</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
